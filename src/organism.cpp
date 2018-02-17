@@ -133,18 +133,7 @@ bool organism::operator==(const organism& other) const {
 	return (_metadata == other._metadata) && (_genes == other._genes);
 }
 
-// We're going to sort by genotype.
+// We're going to sort by string only. That's how the data will be output.
 bool organism::operator<(const organism& other) const {
-	for(auto& kvp : _genes) {
-		// compare associated genes. 
-		auto found = other._genes.find(kvp.first);
-		if(found == other._genes.end()) {
-			return false;
-		}
-
-		if(kvp.second >= found->second) {
-			return false;
-		}
-	}
-	return true;
+	return get_genotype_string() < other.get_genotype_string();
 }

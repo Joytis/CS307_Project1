@@ -154,8 +154,8 @@ void simulation::print_results(std::ostream& os) {
 		   << " heterozygous dominant "<< '(' << dom_pheno << ' ' << dom_char << rec_char << ')' 
 		   << std::endl;
 		// Homo recessive. 
-		os << '\t' << meta.get_genotype_count(genotype::homozygous_dominant) 
-		   << " homozygous dominant "<< '(' << rec_pheno << ' ' << rec_char << rec_char << ')' 
+		os << '\t' << meta.get_genotype_count(genotype::homozygous_recessive) 
+		   << " homozygous recessive "<< '(' << rec_pheno << ' ' << rec_char << rec_char << ')' 
 		   << std::endl << std::endl;
 	});
 
