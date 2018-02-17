@@ -1,0 +1,58 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "^(.+)\\((\\d+)\\):() (.+)$",
+			"name": "project1_307 (Windows)",
+			"shell_cmd": "cmake --build .",
+			"syntax": "Packages/CMakeBuilder/Syntax/Ninja+CL.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "rebuild_cache",
+					"shell_cmd": "cmake --build . --target rebuild_cache"
+				},
+				{
+					"name": "src/rebuild_cache",
+					"shell_cmd": "cmake --build . --target src/rebuild_cache"
+				},
+				{
+					"name": "project1.exe",
+					"shell_cmd": "cmake --build . --target project1.exe"
+				},
+				{
+					"name": "src/all",
+					"shell_cmd": "cmake --build . --target src/all"
+				},
+				{
+					"name": "all",
+					"shell_cmd": "cmake --build . --target all"
+				},
+				{
+					"name": "clean",
+					"shell_cmd": "cmake --build . --target clean"
+				}
+			],
+			"working_dir": "${project_path}/build"
+		}
+	],
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"build",
+				"release"
+			],
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"cmake":
+		{
+			"build_folder": "${project_path}/build",
+			"generator": "Ninja"
+		}
+	}
+}
