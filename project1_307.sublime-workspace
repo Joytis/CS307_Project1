@@ -4,12 +4,24 @@
 		"selected_items":
 		[
 			[
-				"new",
-				"new_second"
+				"project",
+				"project_name"
+			],
+			[
+				"projec",
+				"project_name"
 			],
 			[
 				"homo",
-				"homozygous_recessive"
+				"homozygous_recessive\t(gene_metadata.cpp)"
+			],
+			[
+				"gene",
+				"gene"
+			],
+			[
+				"new",
+				"new_second"
 			],
 			[
 				"gen1",
@@ -22,10 +34,6 @@
 			[
 				"allal",
 				"allele::dominant"
-			],
-			[
-				"gene",
-				"gene2"
 			],
 			[
 				"gene1",
@@ -506,107 +514,73 @@
 			[
 				"Clear",
 				"ClearGameObjects()\tvoid"
-			],
-			[
-				"Check",
-				"CheckUpdatedAttack"
-			],
-			[
-				"Contains",
-				"ContainsKey(TKey key)\tbool"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/simulation.cpp",
+			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 5551,
+				"buffer_size": 725,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/organism.cpp",
-			"settings":
-			{
-				"buffer_size": 3843,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/gene_metadata.cpp",
-			"settings":
-			{
-				"buffer_size": 2824,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/organism.hpp",
-			"settings":
-			{
-				"buffer_size": 1640,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/gene.cpp",
-			"settings":
-			{
-				"buffer_size": 2729,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/gene_metadata.hpp",
-			"settings":
-			{
-				"buffer_size": 1257,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 18 files for \"allele\" (whole word)\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\allele.hpp:\n    1: enum class allele : int{\n    2  \tdominant,\n    3  \trecessive\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\gene.cpp:\n    5  \n    6  gene::gene() {} // do nothing\n    7: gene::gene(allele first, allele second, gene_metadata* meta) \n    8  \t: _first(first), _second(second), _metadata(meta)\n    9  {\n   10  \t// Set the genotype according to set alleles. \n   11: \tif(_first == allele::dominant && _second == allele::dominant) {\n   12  \t\t_geno = gene_metadata::genotype::homozygous_dominant;\n   13  \t}\n   14: \telse if((_first == allele::dominant && _second == allele::recessive) || \n   15: \t\t\t(_first == allele::recessive && _second == allele::dominant)) {\n   16  \t\t_geno = gene_metadata::genotype::heterozygous_dominant;\n   17  \t}\n   ..\n   63  \n   64      // pick new gene randomly.\n   65:     allele new_first;\n   66      if(dist(rd) < 0.5) \n   67      \tnew_first = gene1._first;\n   ..\n   70  \n   71      // pick new gene2 randomly\n   72:     allele new_second;\n   73      if(dist(rd) < 0.5) \n   74      \tnew_second = gene2._first;\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\gene.hpp:\n   10  \n   11  private:\n   12: \t// allele _first;\n   13: \t// allele _second;\n   14  \tgene_metadata::genotype _geno;\n   15  \tgene_metadata* _metadata;\n   ..\n   17  public:\n   18  \tgene();\n   19: \tgene(allele first, allele second, gene_metadata* meta);\n   20  \n   21  \tstd::string get_genotype_string() const;\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\gene_metadata.cpp:\n   62  // Small data, so just return a copy.\n   63  // Requires input string to be valid and checked by gene pair. \n   64: std::pair<allele, allele> gene_metadata::parse_pair(std::string& str) {\n   65: \tallele first;\n   66: \tallele second;\n   67  \n   68: \t// Parse first allele\n   69  \tif(str[0] == _recessive_char) \n   70: \t\tfirst = allele::recessive;\n   71  \telse \n   72: \t\tfirst = allele::dominant;\n   73  \n   74: \t// parse second allele\n   75  \tif(str[1] == _recessive_char) \n   76: \t\tsecond = allele::recessive;\n   77  \telse \n   78: \t\tsecond = allele::dominant;\n   79  \n   80  \treturn std::make_pair(first, second);\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\gene_metadata.hpp:\n    5  #include <unordered_map>\n    6  \n    7: #include \"allele.hpp\"\n    8  \n    9  class gene_metadata {\n   ..\n   44  \n   45  \tbool check_gene_pair(std::string& std); // check if gene pair is valid\n   46: \tstd::pair<allele, allele> parse_pair(std::string& str); //Parse into alleles. \n   47  \n   48  \tfriend std::ostream& operator<<(std::ostream& os, const gene_metadata& m);\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\GeneticsSimDataParser.cpp:\n  114  // Args:\t*trait - pointer to a character array to hold the trait name\n  115  //\t\t\t*domDesc - pointer to a character array to hold the name of the\n  116: //\t\t\t\t\t\tdominant allele name\n  117  //\t\t\t*domSymbol - pointer to a char variable to hold the dominant\n  118  //\t\t\t\t\t\ttrait letter symbol\n  119  //\t\t\t*recDesc - pointer to a character array to hold the name of the\n  120: //\t\t\t\t\t\trecessive allele name\n  121  //\t\t\t*recSymbol - pointer to a char variable to hold the recessive\n  122  //\t\t\t\t\t\ttrait letter symbol\n  ...\n  156  \t\t\t\t\t\t\tif(getNextLine(line, 127))\n  157  \t\t\t\t\t\t\t{\n  158: \t\t\t\t\t\t\t\tstrcpy(domDesc, line); // Set the dominant allele name\n  159  \t\t\t\t\t\t\t}\n  160  \t\t\t\t\t\t\telse\n  ...\n  165  \t\t\t\t\t\t\tif(getNextLine(line, 127))\n  166  \t\t\t\t\t\t\t{\n  167: \t\t\t\t\t\t\t\t*domSymbol = line[0]; // Set the dominant allele symbol\n  168  \t\t\t\t\t\t\t}\n  169  \t\t\t\t\t\t\telse\n  ...\n  174  \t\t\t\t\t\t\tif(getNextLine(line, 127))\n  175  \t\t\t\t\t\t\t{\n  176: \t\t\t\t\t\t\t\tstrcpy(recDesc, line); // Set the recessive allele name\n  177  \t\t\t\t\t\t\t}\n  178  \t\t\t\t\t\t\telse\n  ...\n  183  \t\t\t\t\t\t\tif(getNextLine(line, 127))\n  184  \t\t\t\t\t\t\t{\n  185: \t\t\t\t\t\t\t\t*recSymbol = line[0]; // Set the dominant allele symbol\n  186  \t\t\t\t\t\t\t}\n  187  \t\t\t\t\t\t\telse\n\n34 matches across 6 files\n\n\nSearching 18 files for \"switch\" (whole word)\n\nC:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1\\src\\gene.cpp:\n   17  \tstd::string ret_val = \"\";\n   18  \t// Homozygus dominant\n   19: \tswitch(_geno) {\n   20  \t\tcase gene_metadata::genotype::homozygous_dominant:\n   21  \t\t\tret_val += _metadata->get_dominant_char();\n   ..\n   53      // create allales from the genotypes \n   54      std::pair<allele, allele> gene1_pair;\n   55:     switch(gene1._geno) {\n   56      \tcase\n   57      }\n\n2 matches in 1 file\n",
-			"settings":
-			{
-				"buffer_size": 4544,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "src/gene.hpp",
-			"settings":
-			{
-				"buffer_size": 1044,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/genotype.hpp",
-			"settings":
-			{
-				"buffer_size": 92,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
+			"contents": "\n\nenum class allele : int{\n\tdominant,\n\trecessive\n};",
 			"file": "src/allele.hpp",
+			"file_size": 343,
+			"file_write_time": 131633152426163987,
 			"settings":
 			{
-				"buffer_size": 49,
+				"buffer_size": 51,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "project1_307.sublime-project",
+			"settings":
+			{
+				"buffer_size": 1078,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/CMakeLists.txt",
+			"settings":
+			{
+				"buffer_size": 262,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/C++.tmpl",
+			"settings":
+			{
+				"buffer_size": 273,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/FileHeader.py",
+			"settings":
+			{
+				"buffer_size": 24154,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/C#.tmpl",
+			"settings":
+			{
+				"buffer_size": 146,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -674,6 +648,18 @@
 		"selected_items":
 		[
 			[
+				"filehea",
+				"FileHeader: Add Header"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Cmake clear",
+				"CMakeBuilder: Clear Cache"
+			],
+			[
 				"delete",
 				"File: Delete"
 			],
@@ -688,10 +674,6 @@
 			[
 				"list",
 				"Package Control: List Packages"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"remove",
@@ -889,25 +871,30 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/gene_metadata.cpp",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/project1_307.sublime-project",
+		"/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/FileHeader.py",
+		"/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/ActionScript.tmpl",
+		"/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/C#.tmpl",
+		"/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/body/C++.tmpl",
+		"/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/C++.tmpl",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/genotype.hpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/organism_metadata.hpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/simulation.cpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/organism.cpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/simulation.hpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/gene.hpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/organism.hpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/main.cpp",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/simulation.cpp",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/simulation.hpp",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/organism.cpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/gene.cpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/gene_metadata.hpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/gene_metadata.cpp",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/organism_metadata.hpp",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/CMakeLists.txt",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/lib/data.xml",
+		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/main.cpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/organism_metadata.cpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/GeneticsSimDataParser.hpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/GeneticsSimDataParser.cpp",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/allele.hpp",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/lib/data.xml",
 		"/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/project1_307.sublime-project",
-		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/CMakeLists.txt",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/CMakeLists.txt",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/build/cmake_install.cmake",
 		"/C/Users/Clark/Documents/Programming/School/CS307/project1/src/testclass.h",
@@ -1011,16 +998,11 @@
 		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/Player/PlayerMovement.cs",
 		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/Enemies/Burb/BurbMovement.cs",
 		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/CombatLibrary/HitInfo.cs",
-		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/RaycastController.cs",
-		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Editor/Drawers/SerDictionaryDrawer.cs",
-		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/ProcGen/ChunkMetadataBox.cs",
-		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/CombatLibrary/AttackStructures.cs",
-		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/ProcGen/ProcGenConstants.cs",
-		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Editor/Drawers/CustomSerDictionaryDrawers.cs"
+		"/C/Users/Clark/Documents/Programming/Projects/main_game/Assets/Scripts/Game/RaycastController.cs"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -1035,6 +1017,26 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"get_project_name",
+			"file_name",
+			"project_name",
+			"filename",
+			"file_name",
+			"project_name",
+			"author",
+			"create_time",
+			"project_name",
+			"author",
+			"Dwarf",
+			"_genes",
+			"dominant",
+			"homozygous_dominant",
+			"a",
+			"organism",
+			"first",
+			"_geno",
+			"unordered_map",
+			"unorderd_map",
 			"gene_metadata::",
 			"new_second",
 			"new_first",
@@ -1142,27 +1144,7 @@
 			"foreach_gene_metadata",
 			"transform_gene_metadata",
 			"void",
-			"simulation",
-			"int",
-			"size_t",
-			"int",
-			"f <",
-			"f",
-			"rd",
-			"f",
-			"auto",
-			"is_breedable_with",
-			"can_breed_with",
-			"is_breedable_with",
-			";\n",
-			"second",
-			"first",
-			"second",
-			"first",
-			"& ",
-			"std::cout",
-			"check_character",
-			"Enumeration"
+			"simulation"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1175,595 +1157,51 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
+		"whole_word": false,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/simulation.cpp",
+					"file": "src/main.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5551,
+						"buffer_size": 725,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5086,
-								5086
+								287,
+								287
 							]
 						],
 						"settings":
 						{
-							"history_list_is_closing": true,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2033.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/organism.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3843,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1801,
-								1801
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 624.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "src/gene_metadata.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2824,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1946,
-								1946
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 914.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/organism.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1640,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								224,
-								224
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/gene.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2729,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2517,
-								2517
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1008.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/gene_metadata.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1257,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								954,
-								954
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4544,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										139,
-										145
-									],
-									[
-										326,
-										332
-									],
-									[
-										340,
-										346
-									],
-									[
-										520,
-										526
-									],
-									[
-										551,
-										557
-									],
-									[
-										671,
-										677
-									],
-									[
-										702,
-										708
-									],
-									[
-										746,
-										752
-									],
-									[
-										778,
-										784
-									],
-									[
-										937,
-										943
-									],
-									[
-										1087,
-										1093
-									],
-									[
-										1285,
-										1291
-									],
-									[
-										1311,
-										1317
-									],
-									[
-										1450,
-										1456
-									],
-									[
-										1464,
-										1470
-									],
-									[
-										1774,
-										1780
-									],
-									[
-										1782,
-										1788
-									],
-									[
-										1844,
-										1850
-									],
-									[
-										1866,
-										1872
-									],
-									[
-										1912,
-										1918
-									],
-									[
-										1975,
-										1981
-									],
-									[
-										2025,
-										2031
-									],
-									[
-										2075,
-										2081
-									],
-									[
-										2139,
-										2145
-									],
-									[
-										2190,
-										2196
-									],
-									[
-										2402,
-										2408
-									],
-									[
-										2562,
-										2568
-									],
-									[
-										2570,
-										2576
-									],
-									[
-										2990,
-										2996
-									],
-									[
-										3211,
-										3217
-									],
-									[
-										3453,
-										3459
-									],
-									[
-										3620,
-										3626
-									],
-									[
-										3791,
-										3797
-									],
-									[
-										3958,
-										3964
-									],
-									[
-										4227,
-										4233
-									],
-									[
-										4471,
-										4477
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								4230,
-								4230
-							]
-						],
-						"settings":
-						{
-							"default_dir": "C:\\Users\\Clark\\Documents\\Programming\\School\\CS307\\project1",
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1904.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/gene.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1044,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								433,
-								433
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 3,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "src/organism.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1640,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								462,
-								462
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/gene.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1044,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								297,
-								297
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 48.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/gene_metadata.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2824,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								461,
-								461
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/gene_metadata.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1257,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								682,
-								682
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 336.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/gene.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2729,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2400,
-								2400
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 912.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/genotype.hpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 92,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								44,
-								44
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"open_with_edit": true,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
+					"buffer": 1,
 					"file": "src/allele.hpp",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 49,
+						"buffer_size": 51,
 						"regions":
 						{
 						},
@@ -1771,18 +1209,449 @@
 						[
 							[
 								0,
-								49
+								0
 							]
 						],
 						"settings":
 						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								2,
+								16,
+								12,
+								9,
+								18,
+								13,
+								49,
+								198,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "project1_307.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1078,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								270,
+								270
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								2,
+								5,
+								16,
+								14,
+								36,
+								7,
+								164,
+								54,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/zzz A File Icon zzz/aliases/JSON (Sublime).sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "src/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								262,
+								262
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								2,
+								5,
+								16,
+								13,
+								47,
+								10,
+								9,
+								141,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/CMake/CMake.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/C++.tmpl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 273,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								2,
+								16,
+								22,
+								6,
+								8,
+								13,
+								255,
+								120,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/FileHeader.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5360,
+								5360
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								2,
+								16,
+								22,
+								6,
+								8,
+								10,
+								11,
+								122,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3172.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/Clark/AppData/Roaming/Sublime Text 3/Packages/FileHeader/template/header/C#.tmpl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								2,
+								16,
+								22,
+								6,
+								8,
+								13,
+								247,
+								190,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1868,16 +1737,56 @@
 		"selected_items":
 		[
 			[
-				"simu",
-				"src\\simulation.cpp"
+				"project",
+				"project1_307.sublime-project"
+			],
+			[
+				"proj",
+				"project1_307.sublime-project"
 			],
 			[
 				"gene",
-				"src\\gene.cpp"
+				"src\\gene_metadata.cpp"
+			],
+			[
+				"allele",
+				"src\\allele.hpp"
+			],
+			[
+				"main",
+				"src\\main.cpp"
+			],
+			[
+				"Cmake",
+				"src\\CMakeLists.txt"
+			],
+			[
+				"data",
+				"lib\\data.xml"
+			],
+			[
+				"or",
+				"src\\organism.cpp"
 			],
 			[
 				"organism",
 				"src\\organism.cpp"
+			],
+			[
+				"sim",
+				"src\\simulation.cpp"
+			],
+			[
+				"simul",
+				"src\\simulation.hpp"
+			],
+			[
+				"pro",
+				"project1_307.sublime-project"
+			],
+			[
+				"simu",
+				"src\\simulation.cpp"
 			],
 			[
 				"geno",
@@ -1888,20 +1797,12 @@
 				"src\\gene_metadata.cpp"
 			],
 			[
-				"or",
-				"src\\organism.cpp"
-			],
-			[
 				"organi",
 				"src\\organism.hpp"
 			],
 			[
 				"simulation",
 				"src\\simulation.hpp"
-			],
-			[
-				"simul",
-				"src\\simulation.cpp"
 			],
 			[
 				"organis",
@@ -1916,10 +1817,6 @@
 				"src\\simulation.hpp"
 			],
 			[
-				"main",
-				"src\\main.cpp"
-			],
-			[
 				"orni",
 				"src\\organism_metadata.cpp"
 			],
@@ -1930,10 +1827,6 @@
 			[
 				"org",
 				"src\\organism.hpp"
-			],
-			[
-				"sim",
-				"src\\simulation.hpp"
 			],
 			[
 				"orga",
@@ -1988,10 +1881,6 @@
 				"src\\organism.cpp"
 			],
 			[
-				"allele",
-				"src\\allele.hpp"
-			],
-			[
 				"min",
 				"src\\main.cpp"
 			],
@@ -2006,10 +1895,6 @@
 			[
 				"gen",
 				"src\\GeneticsSimDataParser.hpp"
-			],
-			[
-				"data",
-				"lib\\data.xml"
 			],
 			[
 				"gener",
@@ -2032,16 +1917,8 @@
 				"src\\GeneticsSimDataParser.cpp"
 			],
 			[
-				"Cmake",
-				"src\\CMakeLists.txt"
-			],
-			[
 				"genetic",
 				"src\\GeneticsSimDataParser.hpp"
-			],
-			[
-				"proj",
-				"project1_307.sublime-project"
 			],
 			[
 				"Sim",
@@ -2370,14 +2247,6 @@
 			[
 				"ChunkLoad",
 				"Assets\\Editor\\Windows\\ChunkLoaderWindow.cs"
-			],
-			[
-				"CombatC",
-				"Assets\\Editor\\Windows\\CombatControllerWindow.cs"
-			],
-			[
-				"ChunkLoader",
-				"Assets\\Editor\\Windows\\ChunkLoaderWindow.cs"
 			]
 		],
 		"width": 0.0
@@ -2411,7 +2280,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 282.0,
 	"status_bar_visible": true,
 	"template_settings":

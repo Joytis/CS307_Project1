@@ -1,3 +1,13 @@
+/*******************************************************************
+*   gene_metadata.cpp
+*   path_to_file
+*   Author: Clark Chambers
+*   Date: 2018-02-05 16:24:03
+*   
+*   This program is entirely my own work
+*******************************************************************/
+
+
 #include "gene_metadata.hpp"
 
 
