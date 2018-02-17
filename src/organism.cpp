@@ -132,3 +132,19 @@ void organism::format_print(std::ostream& os, std::string& title) {
 bool organism::operator==(const organism& other) const {
 	return (_metadata == other._metadata) && (_genes == other._genes);
 }
+
+// We're going to sort by genotype.
+bool organism::operator<(const organism& other) const {
+	for(auto& kvp : _genes) {
+		// compare associated genes. 
+		auto found = other._genes.find(kvp.first);
+		if(found == other._genes.end()) {
+			return false;
+		}
+
+		if(kvp.second >= found->second) {
+			return false;
+		}
+	}
+	return true;
+}

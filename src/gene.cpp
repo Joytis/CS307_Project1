@@ -84,7 +84,16 @@ gene gene::breed(const gene& gene1, const gene& gene2) {
     return gene(new_geno, gene1._metadata);
 }
 
-bool gene::operator==(const gene& other) const{
+bool gene::operator==(const gene& other) const {
 	return (_geno == other._geno) &&
 		   (_metadata == other._metadata);
 }
+
+bool gene::operator<(const gene& other) const {
+	return _geno < other._geno;
+}
+
+bool gene::operator>=(const gene& other) const {
+	return _geno >= other._geno;
+}
+

@@ -1,5 +1,7 @@
 #pragma once
+
 #include <string>
+#include <map>
 
 #include "organism_metadata.hpp"
 #include "organism.hpp"
@@ -14,7 +16,7 @@ private:
 	organism_metadata _org_data;	// storage for organism metadata. 
 
 	std::vector<organism> _children;	
-	std::unordered_map<organism, size_t> _organism_counts;
+	std::map<organism, size_t> _organism_counts;
 	
 
 public:

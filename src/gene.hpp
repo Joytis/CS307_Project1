@@ -29,6 +29,8 @@ public:
 	static gene breed(const gene& gene1, const gene& gene2);
 
 	bool operator==(const gene& other) const;
+	bool operator<(const gene& other) const;
+	bool operator>=(const gene& other) const;
 };
 
 // Hash function for organism

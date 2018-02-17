@@ -39,6 +39,8 @@ public:
 
 	// operatorsp
 	bool operator==(const organism &a) const;
+	bool operator<(const organism &a) const;
+
 };
 
 // Hash function for organism
