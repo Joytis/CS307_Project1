@@ -15,7 +15,7 @@
 int main(int argc, const char** argv) {
 
 	if(argc != 2) {
-		std::cout << "USAGE INFORMATION" << std::endl;
+		std::cout << "Please enter the XML data file path to read. " << std::endl;
 		return -1;
 	}
 

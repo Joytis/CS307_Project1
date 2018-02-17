@@ -28,6 +28,7 @@ private:
 	bool check_character(char c); // checks if character is either a dominant or recessive char. 
 	void reset_genotype_counters();
 
+	static std::unordered_map<genotype, std::pair<allele, allele>> _create_table(); 
 	// running tallies of all genes created with specific genotypes. 
 	std::unordered_map<genotype, size_t> _totals;
 

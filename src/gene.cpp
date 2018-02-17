@@ -20,12 +20,17 @@ gene::gene(genotype geno, gene_metadata* meta)
 	_metadata->increment_genotype(_geno);
 }
 
+static std::unordered_map<genotype, std::pair<allele, allele>> _create_table() {
+	std::unordered_map<genotype, std::pair<allele, allele>> table;
+	table[genotype::homozygous_dominant] = std::make_pair(allele::dominant, allele::dominant);
+	table[genotype::heterozygous_dominant] = std::make_pair(allele::dominant, allele::recessive);
+	table[genotype::homozygous_recessive] = std::make_pair(allele::recessive, allele::recessive);
+	return table;
+}
+
 std::pair<allele, allele> gene::genotype_to_pair(genotype geno) {
-	static std::unordered_map<genotype, std::pair<allele, allele>> table = {
-		{genotype::homozygous_dominant, std::make_pair(allele::dominant, allele::dominant)}, 
-		{genotype::heterozygous_dominant, std::make_pair(allele::dominant, allele::recessive)}, 
-		{genotype::homozygous_recessive, std::make_pair(allele::recessive, allele::recessive)} 
-	};
+	// Still no initializer lists in msvc :'c
+	static std::unordered_map<genotype, std::pair<allele, allele>> table = _create_table();
 
 	// create allales from the genotypes 
     return table[geno];
