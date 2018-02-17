@@ -83,16 +83,33 @@
 				c
 			</RECESSIVE_SYMBOL>
 		</GENE>
+		<GENE>
+			<GENE_TRAIT>
+				Plant Dopeness
+			</GENE_TRAIT>
+			<DOMINANT_ALLELE>
+				Pretty Dope
+			</DOMINANT_ALLELE>
+			<DOMINANT_SYMBOL>
+				D
+			</DOMINANT_SYMBOL>
+			<RECESSIVE_ALLELE>
+				Not So Dope
+			</RECESSIVE_ALLELE>
+			<RECESSIVE_SYMBOL>
+				d
+			</RECESSIVE_SYMBOL>
+		</GENE>
 	</GENES>
 	<PARENTS>
 		<PARENT>
 			<GENOTYPE>
-				Tt Ww Ss Cc
+				Tt Ww Ss Cc Dd
 			</GENOTYPE>
 		</PARENT>
 		<PARENT>
 			<GENOTYPE>
-				Tt Ww Ss Cc
+				Tt Ww Ss Cc Dd
 			</GENOTYPE>
 		</PARENT>
 	</PARENTS>
